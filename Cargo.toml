@@ -1,0 +1,21 @@
+
+[package]
+authors = ["Mon Albert Gamil <mrgamilmonalbert@gmail.com>"]
+edition = "2024"
+name    = "sipat"
+version = "0.0.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi        = "3.0.0"
+napi-derive = "3.0.0"
+
+[build-dependencies]
+napi-build = "2"
+
+[profile.release]
+codegen-units = 1
+lto           = true
+strip         = "symbols"

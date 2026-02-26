@@ -1,0 +1,96 @@
+{
+  "name": "sipat",
+  "version": "0.0.1",
+  "description": "Generate fast thumbnails and previews for images and documents",
+  "main": "index.js",
+  "author": {
+    "name": "Mon Albert Gamil",
+    "email": "mrgamilmonalbert@gmail.com",
+    "url": "https://github.com/xcvzmoon/"
+  },
+  "license": "MIT",
+  "browser": "browser.js",
+  "keywords": [
+    "sipat",
+    "thumbnail",
+    "preview",
+    "document",
+    "pdf",
+    "image",
+    "office",
+    "file"
+  ],
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "browser.js"
+  ],
+  "napi": {
+    "binaryName": "sipat",
+    "targets": [
+      "x86_64-pc-windows-msvc",
+      "x86_64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "aarch64-apple-darwin"
+    ]
+  },
+  "engines": {
+    "node": ">= 12.22.0 < 13 || >= 14.17.0 < 15 || >= 15.12.0 < 16 || >= 16.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "bench": "vitest bench",
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "format": "run-p format:oxfmt format:rs format:toml",
+    "format:oxfmt": "oxfmt && oxfmt --check",
+    "format:toml": "taplo format",
+    "format:rs": "cargo fmt",
+    "lint": "oxlint --type-aware",
+    "prepublishOnly": "napi prepublish -t npm",
+    "test": "vitest",
+    "preversion": "napi build --platform && git add .",
+    "version": "napi version",
+    "prepare": "husky",
+    "changelog": "changelogen",
+    "changelog:bump": "changelogen --bump",
+    "changelog:release": "changelogen --release"
+  },
+  "devDependencies": {
+    "@emnapi/core": "^1.8.1",
+    "@emnapi/runtime": "^1.8.1",
+    "@napi-rs/cli": "^3.5.1",
+    "@oxc-node/core": "^0.0.35",
+    "@taplo/cli": "^0.7.0",
+    "@tybys/wasm-util": "^0.10.1",
+    "@types/bun": "latest",
+    "@types/node": "^25.3.1",
+    "chalk": "^5.6.2",
+    "changelogen": "^0.6.2",
+    "consola": "^3.4.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "npm-run-all2": "^8.0.4",
+    "oxfmt": "^0.31.0",
+    "oxlint": "^1.50.0",
+    "oxlint-tsgolint": "^0.12.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "oxlint --fix"
+    ],
+    "*.{js,ts,json,jsonc,md,yml,yaml}": [
+      "oxfmt ."
+    ],
+    "*.toml": [
+      "taplo format"
+    ]
+  },
+  "packageManager": "bun@1.3.10"
+}
