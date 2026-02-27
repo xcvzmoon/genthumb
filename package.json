@@ -52,7 +52,7 @@
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "vitest",
+    "test": "vitest --run",
     "preversion": "napi build --platform && git add .",
     "version": "napi version",
     "prepare": "husky",

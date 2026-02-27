@@ -9,8 +9,12 @@ version = "0.0.1"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi        = "3.0.0"
-napi-derive = "3.0.0"
+anyhow      = "1"
+image       = "0.25.9"
+infer       = "0.19.0"
+napi        = { version = "3.8.3", features = ["error_anyhow"] }
+napi-derive = "3.5.1"
+thiserror   = "2.0.18"
 
 [build-dependencies]
 napi-build = "2"
