@@ -1,6 +1,6 @@
 {
   "name": "sipat",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate fast thumbnails and previews for images and documents",
   "main": "index.js",
   "author": {
