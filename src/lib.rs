@@ -5,6 +5,7 @@ use napi::bindgen_prelude::*;
 use napi_derive::napi;
 use std::path::Path;
 
+pub mod pdf;
 pub mod thumbnail;
 
 use thumbnail::ThumbnailOptions;

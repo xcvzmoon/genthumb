@@ -1,3 +1,4 @@
+use crate::pdf;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
 use std::path::Path;
 
@@ -6,15 +7,42 @@ pub struct ThumbnailOptions {
   pub height: u32,
 }
 
-pub fn detect_image_type(path: &Path) -> Option<&'static str> {
-  match infer::get_from_path(path) {
-    Ok(Some(kind)) => Some(kind.extension()),
-    _ => None,
-  }
+enum InputType {
+  Image,
+  Pdf,
+  Unsupported(String),
 }
 
 pub fn load_image(path: &Path) -> Result<DynamicImage, ImageError> {
   image::open(path)
+}
+
+fn detect_input_type(path: &Path) -> InputType {
+  if let Ok(Some(kind)) = infer::get_from_path(path) {
+    let mime = kind.mime_type();
+
+    if mime.starts_with("image/") {
+      return InputType::Image;
+    }
+
+    if mime == "application/pdf" {
+      return InputType::Pdf;
+    }
+
+    return InputType::Unsupported(mime.to_string());
+  }
+
+  if let Some(ext) = path.extension().and_then(|extension| extension.to_str()) {
+    match ext.to_ascii_lowercase().as_str() {
+      "pdf" => return InputType::Pdf,
+      "jpg" | "jpeg" | "png" | "gif" | "bmp" | "webp" | "tiff" | "tif" => {
+        return InputType::Image;
+      }
+      _ => return InputType::Unsupported(ext.to_string()),
+    }
+  }
+
+  InputType::Unsupported("unknown".to_string())
 }
 
 pub fn resize_image(img: DynamicImage, opts: ThumbnailOptions) -> DynamicImage {
@@ -37,8 +65,16 @@ pub fn encode_webp(img: DynamicImage) -> Result<Vec<u8>, ImageError> {
   Ok(bytes)
 }
 
-pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> Result<Vec<u8>, ImageError> {
-  let img = load_image(path)?;
+pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> anyhow::Result<Vec<u8>> {
+  let img = match detect_input_type(path) {
+    InputType::Image => load_image(path)?,
+    InputType::Pdf => pdf::render_first_page(path)?,
+    InputType::Unsupported(kind) => {
+      anyhow::bail!("Unsupported file format: {}", kind);
+    }
+  };
+
   let resized = resize_image(img, opts);
-  encode_webp(resized)
+  let encoded = encode_webp(resized)?;
+  Ok(encoded)
 }
