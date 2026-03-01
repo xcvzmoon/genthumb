@@ -1,3 +1,4 @@
+use crate::docx;
 use crate::pdf;
 use crate::spreadsheet;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
@@ -11,6 +12,7 @@ pub struct ThumbnailOptions {
 enum InputType {
   Image,
   Pdf,
+  Docx,
   Spreadsheet,
   Unsupported(String),
 }
@@ -31,6 +33,10 @@ fn detect_input_type(path: &Path) -> InputType {
       return InputType::Pdf;
     }
 
+    if mime == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" {
+      return InputType::Docx;
+    }
+
     if mime == "text/csv"
       || mime == "application/vnd.ms-excel"
       || mime == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -47,6 +53,7 @@ fn detect_input_type(path: &Path) -> InputType {
   if let Some(ext) = path.extension().and_then(|extension| extension.to_str()) {
     match ext.to_ascii_lowercase().as_str() {
       "pdf" => return InputType::Pdf,
+      "docx" => return InputType::Docx,
       "csv" | "tsv" | "xlsx" | "xls" | "xlsm" | "xlsb" | "ods" => {
         return InputType::Spreadsheet;
       }
@@ -84,6 +91,7 @@ pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> anyhow::Result
   let img = match detect_input_type(path) {
     InputType::Image => load_image(path)?,
     InputType::Pdf => pdf::render_first_page(path)?,
+    InputType::Docx => docx::render_preview(path)?,
     InputType::Spreadsheet => spreadsheet::render_preview(path)?,
     InputType::Unsupported(kind) => {
       anyhow::bail!("Unsupported file format: {}", kind);
