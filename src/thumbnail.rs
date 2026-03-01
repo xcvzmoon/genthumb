@@ -2,6 +2,7 @@ use crate::docx;
 use crate::pdf;
 use crate::pptx;
 use crate::spreadsheet;
+use crate::text;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
 use std::path::Path;
 
@@ -16,6 +17,7 @@ enum InputType {
   Docx,
   Pptx,
   Spreadsheet,
+  Text,
   Unsupported(String),
 }
 
@@ -55,6 +57,23 @@ fn detect_input_type(path: &Path) -> InputType {
       return InputType::Spreadsheet;
     }
 
+    if mime.starts_with("text/") {
+      let extension = path
+        .extension()
+        .and_then(|ext| ext.to_str())
+        .map(|ext| ext.to_ascii_lowercase());
+
+      if mime == "text/csv"
+        || mime == "text/tab-separated-values"
+        || extension.as_deref() == Some("csv")
+        || extension.as_deref() == Some("tsv")
+      {
+        return InputType::Spreadsheet;
+      }
+
+      return InputType::Text;
+    }
+
     return InputType::Unsupported(mime.to_string());
   }
 
@@ -66,6 +85,7 @@ fn detect_input_type(path: &Path) -> InputType {
       "csv" | "tsv" | "xlsx" | "xls" | "xlsm" | "xlsb" | "ods" => {
         return InputType::Spreadsheet;
       }
+      "txt" | "text" | "md" | "markdown" | "log" => return InputType::Text,
       "jpg" | "jpeg" | "png" | "gif" | "bmp" | "webp" | "tiff" | "tif" => {
         return InputType::Image;
       }
@@ -103,6 +123,7 @@ pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> anyhow::Result
     InputType::Docx => docx::render_preview(path)?,
     InputType::Pptx => pptx::render_preview(path)?,
     InputType::Spreadsheet => spreadsheet::render_preview(path)?,
+    InputType::Text => text::render_preview(path)?,
     InputType::Unsupported(kind) => {
       anyhow::bail!("Unsupported file format: {}", kind);
     }

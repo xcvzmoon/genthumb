@@ -9,6 +9,7 @@ pub mod docx;
 pub mod pdf;
 pub mod pptx;
 pub mod spreadsheet;
+pub mod text;
 pub mod thumbnail;
 
 use thumbnail::ThumbnailOptions;
