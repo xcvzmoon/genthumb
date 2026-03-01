@@ -1,4 +1,5 @@
 use crate::pdf;
+use crate::spreadsheet;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
 use std::path::Path;
 
@@ -10,6 +11,7 @@ pub struct ThumbnailOptions {
 enum InputType {
   Image,
   Pdf,
+  Spreadsheet,
   Unsupported(String),
 }
 
@@ -29,12 +31,25 @@ fn detect_input_type(path: &Path) -> InputType {
       return InputType::Pdf;
     }
 
+    if mime == "text/csv"
+      || mime == "application/vnd.ms-excel"
+      || mime == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      || mime == "application/vnd.ms-excel.sheet.macroenabled.12"
+      || mime == "application/vnd.ms-excel.sheet.binary.macroenabled.12"
+      || mime == "application/vnd.oasis.opendocument.spreadsheet"
+    {
+      return InputType::Spreadsheet;
+    }
+
     return InputType::Unsupported(mime.to_string());
   }
 
   if let Some(ext) = path.extension().and_then(|extension| extension.to_str()) {
     match ext.to_ascii_lowercase().as_str() {
       "pdf" => return InputType::Pdf,
+      "csv" | "tsv" | "xlsx" | "xls" | "xlsm" | "xlsb" | "ods" => {
+        return InputType::Spreadsheet;
+      }
       "jpg" | "jpeg" | "png" | "gif" | "bmp" | "webp" | "tiff" | "tif" => {
         return InputType::Image;
       }
@@ -69,6 +84,7 @@ pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> anyhow::Result
   let img = match detect_input_type(path) {
     InputType::Image => load_image(path)?,
     InputType::Pdf => pdf::render_first_page(path)?,
+    InputType::Spreadsheet => spreadsheet::render_preview(path)?,
     InputType::Unsupported(kind) => {
       anyhow::bail!("Unsupported file format: {}", kind);
     }
