@@ -7,6 +7,7 @@ use std::path::Path;
 
 pub mod docx;
 pub mod pdf;
+pub mod pptx;
 pub mod spreadsheet;
 pub mod thumbnail;
 

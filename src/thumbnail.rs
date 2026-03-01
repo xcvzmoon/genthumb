@@ -1,5 +1,6 @@
 use crate::docx;
 use crate::pdf;
+use crate::pptx;
 use crate::spreadsheet;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
 use std::path::Path;
@@ -13,6 +14,7 @@ enum InputType {
   Image,
   Pdf,
   Docx,
+  Pptx,
   Spreadsheet,
   Unsupported(String),
 }
@@ -37,6 +39,12 @@ fn detect_input_type(path: &Path) -> InputType {
       return InputType::Docx;
     }
 
+    if mime == "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+      || mime == "application/vnd.ms-powerpoint"
+    {
+      return InputType::Pptx;
+    }
+
     if mime == "text/csv"
       || mime == "application/vnd.ms-excel"
       || mime == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -54,6 +62,7 @@ fn detect_input_type(path: &Path) -> InputType {
     match ext.to_ascii_lowercase().as_str() {
       "pdf" => return InputType::Pdf,
       "docx" => return InputType::Docx,
+      "pptx" | "ppt" => return InputType::Pptx,
       "csv" | "tsv" | "xlsx" | "xls" | "xlsm" | "xlsb" | "ods" => {
         return InputType::Spreadsheet;
       }
@@ -92,6 +101,7 @@ pub fn generate_thumbnail(path: &Path, opts: ThumbnailOptions) -> anyhow::Result
     InputType::Image => load_image(path)?,
     InputType::Pdf => pdf::render_first_page(path)?,
     InputType::Docx => docx::render_preview(path)?,
+    InputType::Pptx => pptx::render_preview(path)?,
     InputType::Spreadsheet => spreadsheet::render_preview(path)?,
     InputType::Unsupported(kind) => {
       anyhow::bail!("Unsupported file format: {}", kind);
