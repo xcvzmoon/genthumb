@@ -1,9 +1,7 @@
 # SIPAT
 
 [![CI](https://github.com/xcvzmoon/sipat/actions/workflows/ci.yaml/badge.svg)](https://github.com/xcvzmoon/sipat/actions/workflows/ci.yaml)
-[![Release](https://github.com/xcvzmoon/sipat/actions/https://img.shields.io/badge/github-repo-blue?logo=githubworkflows/release.yaml/badge.svg)](https://github.com/xcvzmoon/sipat/actions/workflows/release.yaml)
-![Build Status](https://github.com/xcvzmoon/sipat/actions/workflows/build.yaml/badge.svg)
-![sample](https://img.shields.io/badge/build-passing-blue)
+[![Release](https://github.com/xcvzmoon/sipat/actions/workflows/release.yaml/badge.svg)](https://github.com/xcvzmoon/sipat/actions/workflows/release.yaml)
+[![Repository](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/xcvzmoon/sipat)
 
-![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github)
 Generate fast thumbnails and previews for images and documents
