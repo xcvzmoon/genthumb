@@ -7,8 +7,8 @@ const testDir = path.join(process.cwd(), 'tests', 'documents');
 describe('generate_thumbnail', () => {
   it('should generate thumbnail from JPEG image', () => {
     const fixturePath = path.join(testDir, 'test-image.jpeg');
-
     const result = generateThumbnail(fixturePath, 100, 100);
+
     expect(result).toBeInstanceOf(Buffer);
     expect(result.length).toBeGreaterThan(0);
 
