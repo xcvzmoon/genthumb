@@ -3,7 +3,7 @@
 authors = ["Mon Albert Gamil <mrgamilmonalbert@gmail.com>"]
 edition = "2024"
 name    = "sipat"
-version = "0.0.2"
+version = "0.0.3"
 
 [lib]
 crate-type = ["cdylib"]
