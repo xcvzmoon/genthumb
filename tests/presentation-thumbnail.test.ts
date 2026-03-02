@@ -18,7 +18,7 @@ describe('generate_thumbnail presentation', () => {
   });
 
   it('should throw error for malformed PPTX', () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sipat-pptx-'));
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'genthumb-pptx-'));
     const malformedPath = path.join(tempDir, 'bad-presentation.pptx');
 
     try {

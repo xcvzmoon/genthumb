@@ -22,7 +22,7 @@ describe('generate_thumbnail document', () => {
   });
 
   it('should throw error for malformed PDF', () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sipat-pdf-'));
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'genthumb-pdf-'));
     const badPdfPath = path.join(tempDir, 'bad-document.pdf');
 
     try {
@@ -44,7 +44,7 @@ describe('generate_thumbnail document', () => {
   });
 
   it('should throw error for malformed DOCX', () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sipat-docx-'));
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'genthumb-docx-'));
     const badDocxPath = path.join(tempDir, 'bad-document.docx');
 
     try {

@@ -3,44 +3,44 @@ use std::fmt;
 use std::io;
 
 #[derive(Debug)]
-pub enum SipatError {
+pub enum GenthumbError {
   UnsupportedFormat(String),
   IoError(io::Error),
   ImageError(ImageError),
 }
 
-impl fmt::Display for SipatError {
+impl fmt::Display for GenthumbError {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     match self {
-      SipatError::UnsupportedFormat(s) => write!(f, "Unsupported file format: {}", s),
-      SipatError::IoError(e) => write!(f, "IO error: {}", e),
-      SipatError::ImageError(e) => write!(f, "Image error: {}", e),
+      GenthumbError::UnsupportedFormat(s) => write!(f, "Unsupported file format: {}", s),
+      GenthumbError::IoError(e) => write!(f, "IO error: {}", e),
+      GenthumbError::ImageError(e) => write!(f, "Image error: {}", e),
     }
   }
 }
 
-impl std::error::Error for SipatError {}
+impl std::error::Error for GenthumbError {}
 
-impl From<io::Error> for SipatError {
+impl From<io::Error> for GenthumbError {
   fn from(err: io::Error) -> Self {
-    SipatError::IoError(err)
+    GenthumbError::IoError(err)
   }
 }
 
-impl From<ImageError> for SipatError {
+impl From<ImageError> for GenthumbError {
   fn from(err: ImageError) -> Self {
-    SipatError::ImageError(err)
+    GenthumbError::ImageError(err)
   }
 }
 
-impl SipatError {
+impl GenthumbError {
   pub fn is_unsupported_format(&self) -> bool {
-    matches!(self, SipatError::UnsupportedFormat(_))
+    matches!(self, GenthumbError::UnsupportedFormat(_))
   }
 }
 
-impl From<SipatError> for napi::Error {
-  fn from(err: SipatError) -> Self {
+impl From<GenthumbError> for napi::Error {
+  fn from(err: GenthumbError) -> Self {
     napi::Error::new(napi::Status::GenericFailure, err.to_string())
   }
 }

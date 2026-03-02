@@ -1,8 +1,8 @@
-name: CI
+name: ci
 
 env:
   DEBUG: napi:*
-  APP_NAME: sipat
+  APP_NAME: genthumb
   MACOSX_DEPLOYMENT_TARGET: '10.13'
   CARGO_INCREMENTAL: '1'
 

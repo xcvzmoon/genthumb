@@ -2,7 +2,7 @@
 [package]
 authors = ["Mon Albert Gamil <mrgamilmonalbert@gmail.com>"]
 edition = "2024"
-name    = "sipat"
+name    = "genthumb"
 version = "0.0.7"
 
 [lib]

@@ -1,7 +1,7 @@
 {
-  "name": "sipat",
+  "name": "genthumb",
   "version": "0.0.7",
-  "description": "Generate fast thumbnails and previews for images and documents",
+  "description": "Generate fast WebP thumbnails from images, PDFs, Office files, spreadsheets, and text",
   "main": "index.js",
   "author": {
     "name": "Mon Albert Gamil",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "browser": "browser.js",
   "keywords": [
-    "sipat",
+    "genthumb",
     "thumbnail",
     "preview",
     "document",
@@ -26,7 +26,7 @@
     "browser.js"
   ],
   "napi": {
-    "binaryName": "sipat",
+    "binaryName": "genthumb",
     "targets": [
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",

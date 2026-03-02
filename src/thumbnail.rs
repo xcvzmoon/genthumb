@@ -167,7 +167,7 @@ pub fn generate_thumbnail_from_buffer(
   let extension = extension_for_mime_type(mime_type);
 
   let mut temp = Builder::new()
-    .prefix("sipat-input-")
+    .prefix("genthumb-input-")
     .suffix(&format!(".{}", extension))
     .tempfile()
     .map_err(|error| anyhow::anyhow!("Failed to create temporary file: {}", error))?;

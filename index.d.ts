@@ -14,7 +14,7 @@
  * @example
  * ```ts
  * import { writeFileSync } from 'node:fs';
- * import { generateThumbnail } from 'sipat';
+ * import { generateThumbnail } from 'genthumb';
  *
  * const output = generateThumbnail('./tests/documents/test-image.jpeg', 320, 240);
  * writeFileSync('./thumbnail.webp', output);
