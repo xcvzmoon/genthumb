@@ -9,6 +9,10 @@
     "email": "mrgamilmonalbert@gmail.com",
     "url": "https://github.com/xcvzmoon/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcvzmoon/genthumb.git"
+  },
   "license": "MIT",
   "browser": "browser.js",
   "keywords": [
