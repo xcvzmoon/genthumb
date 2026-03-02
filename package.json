@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Generate fast WebP thumbnails from images, PDFs, Office files, spreadsheets, and text",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": {
     "name": "Mon Albert Gamil",
     "email": "mrgamilmonalbert@gmail.com",
@@ -23,8 +24,18 @@
   "files": [
     "index.d.ts",
     "index.js",
+    "index.mjs",
     "browser.js"
   ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "browser": "./browser.js",
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "default": "./index.js"
+    }
+  },
   "napi": {
     "binaryName": "genthumb",
     "targets": [
@@ -44,8 +55,8 @@
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "vitest bench",
-    "build": "napi build --platform --release",
-    "build:debug": "napi build --platform",
+    "build": "napi build --platform --release --js index.js && napi build --platform --release --esm --js index.mjs",
+    "build:debug": "napi build --platform --js index.js && napi build --platform --esm --js index.mjs",
     "format": "run-p format:oxfmt format:rs format:toml",
     "format:oxfmt": "oxfmt && oxfmt --check",
     "format:toml": "taplo format",
@@ -53,7 +64,7 @@
     "lint": "oxlint --type-aware",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "vitest --run",
-    "preversion": "napi build --platform && git add .",
+    "preversion": "npm run build:debug && git add .",
     "version": "napi version",
     "prepare": "husky",
     "changelog": "changelogen",
