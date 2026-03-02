@@ -47,7 +47,7 @@ fn read_delimited(path: &Path) -> Result<Vec<Vec<String>>> {
     let row = record
       .iter()
       .take(MAX_COLS)
-      .map(|value| sanitize_cell(value))
+      .map(sanitize_cell)
       .collect::<Vec<_>>();
     rows.push(row);
   }
