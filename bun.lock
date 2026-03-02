@@ -25,6 +25,12 @@
         "typescript": "^5.9.3",
         "vitest": "^4.0.18",
       },
+      "optionalDependencies": {
+        "genthumb-darwin-arm64": "1.0.0",
+        "genthumb-darwin-x64": "1.0.0",
+        "genthumb-linux-x64-gnu": "1.0.0",
+        "genthumb-win32-x64-msvc": "1.0.0",
+      },
     },
   },
   "packages": {
