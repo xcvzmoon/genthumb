@@ -1,6 +1,8 @@
 use anyhow::{Context, Result, anyhow};
 use font8x8::{BASIC_FONTS, UnicodeFonts};
 use image::{DynamicImage, ImageBuffer, Rgba, RgbaImage};
+use pdfium_auto::bind_bundled;
+use pdfium_render::prelude::*;
 use quick_xml::Reader;
 use quick_xml::events::Event;
 use std::fs::File;
@@ -8,16 +10,68 @@ use std::io::Read;
 use std::path::Path;
 use zip::ZipArchive;
 
-const PREVIEW_WIDTH: u32 = 1100;
-const PREVIEW_HEIGHT: u32 = 1500;
-const PADDING: u32 = 36;
-const LINE_HEIGHT: u32 = 16;
-const MAX_LINES: usize = 80;
+const DOC_PREVIEW_WIDTH: u32 = 1100;
+const DOC_PREVIEW_HEIGHT: u32 = 1500;
+const DOC_PADDING: u32 = 36;
+const DOC_LINE_HEIGHT: u32 = 16;
+const DOC_MAX_LINES: usize = 80;
+
+enum DocumentKind {
+  Pdf,
+  Docx,
+}
 
 pub fn render_preview(path: &Path) -> Result<DynamicImage> {
-  let text = extract_docx_text(path)?;
+  match detect_document_kind(path)? {
+    DocumentKind::Pdf => render_pdf_preview(path),
+    DocumentKind::Docx => render_docx_preview(path),
+  }
+}
 
-  Ok(render_text_preview(&text))
+fn detect_document_kind(path: &Path) -> Result<DocumentKind> {
+  if let Ok(Some(kind)) = infer::get_from_path(path) {
+    let mime = kind.mime_type();
+
+    if mime == "application/pdf" {
+      return Ok(DocumentKind::Pdf);
+    }
+
+    if mime == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      || mime == "application/msword"
+    {
+      return Ok(DocumentKind::Docx);
+    }
+  }
+
+  if let Some(extension) = path.extension().and_then(|ext| ext.to_str()) {
+    return match extension.to_ascii_lowercase().as_str() {
+      "pdf" => Ok(DocumentKind::Pdf),
+      "docx" | "doc" => Ok(DocumentKind::Docx),
+      _ => Err(anyhow!("Unsupported document format: {}", extension)),
+    };
+  }
+
+  Err(anyhow!("Unsupported document format"))
+}
+
+fn render_pdf_preview(path: &Path) -> Result<DynamicImage> {
+  let pdfium = bind_bundled().context("Failed to bind bundled PDFium library")?;
+  let document = pdfium
+    .load_pdf_from_file(path, None)
+    .with_context(|| format!("Failed to load PDF: {}", path.display()))?;
+
+  let page = document.pages().get(0).context("PDF has no pages")?;
+
+  let bitmap = page
+    .render_with_config(&PdfRenderConfig::new())
+    .context("Failed to render PDF page")?;
+
+  Ok(bitmap.as_image())
+}
+
+fn render_docx_preview(path: &Path) -> Result<DynamicImage> {
+  let text = extract_docx_text(path)?;
+  Ok(render_docx_text_preview(&text))
 }
 
 fn extract_docx_text(path: &Path) -> Result<String> {
@@ -75,37 +129,46 @@ fn extract_docx_text(path: &Path) -> Result<String> {
   Ok(normalized)
 }
 
-fn render_text_preview(text: &str) -> DynamicImage {
-  let mut image =
-    ImageBuffer::from_pixel(PREVIEW_WIDTH, PREVIEW_HEIGHT, Rgba([249, 250, 251, 255]));
+fn render_docx_text_preview(text: &str) -> DynamicImage {
+  let mut image = ImageBuffer::from_pixel(
+    DOC_PREVIEW_WIDTH,
+    DOC_PREVIEW_HEIGHT,
+    Rgba([249, 250, 251, 255]),
+  );
 
-  let chars_per_line = ((PREVIEW_WIDTH - (PADDING * 2)) / 9) as usize;
-  let wrapped = wrap_text(text, chars_per_line, MAX_LINES);
+  let chars_per_line = ((DOC_PREVIEW_WIDTH - (DOC_PADDING * 2)) / 9) as usize;
+  let wrapped = wrap_docx_text(text, chars_per_line, DOC_MAX_LINES);
 
   fill_rect(
     &mut image,
-    PADDING,
-    PADDING,
-    PREVIEW_WIDTH - (PADDING * 2),
-    PREVIEW_HEIGHT - (PADDING * 2),
+    DOC_PADDING,
+    DOC_PADDING,
+    DOC_PREVIEW_WIDTH - (DOC_PADDING * 2),
+    DOC_PREVIEW_HEIGHT - (DOC_PADDING * 2),
     Rgba([255, 255, 255, 255]),
   );
 
   draw_border(
     &mut image,
-    PADDING,
-    PADDING,
-    PREVIEW_WIDTH - (PADDING * 2),
-    PREVIEW_HEIGHT - (PADDING * 2),
+    DOC_PADDING,
+    DOC_PADDING,
+    DOC_PREVIEW_WIDTH - (DOC_PADDING * 2),
+    DOC_PREVIEW_HEIGHT - (DOC_PADDING * 2),
     Rgba([209, 213, 219, 255]),
   );
 
-  let mut y = PADDING + 20;
+  let mut y = DOC_PADDING + 20;
   for line in wrapped {
-    draw_text_line(&mut image, PADDING + 16, y, &line, Rgba([31, 41, 55, 255]));
-    y += LINE_HEIGHT;
+    draw_text_line(
+      &mut image,
+      DOC_PADDING + 16,
+      y,
+      &line,
+      Rgba([31, 41, 55, 255]),
+    );
+    y += DOC_LINE_HEIGHT;
 
-    if y + LINE_HEIGHT >= PREVIEW_HEIGHT - PADDING {
+    if y + DOC_LINE_HEIGHT >= DOC_PREVIEW_HEIGHT - DOC_PADDING {
       break;
     }
   }
@@ -113,7 +176,7 @@ fn render_text_preview(text: &str) -> DynamicImage {
   DynamicImage::ImageRgba8(image)
 }
 
-fn wrap_text(text: &str, width: usize, max_lines: usize) -> Vec<String> {
+fn wrap_docx_text(text: &str, width: usize, max_lines: usize) -> Vec<String> {
   let mut lines = Vec::new();
 
   for paragraph in text.lines() {
@@ -176,7 +239,7 @@ fn draw_text_line(image: &mut RgbaImage, x: u32, y: u32, text: &str, color: Rgba
     }
 
     cursor_x += 9;
-    if cursor_x + 8 >= PREVIEW_WIDTH - PADDING {
+    if cursor_x + 8 >= DOC_PREVIEW_WIDTH - DOC_PADDING {
       break;
     }
   }
