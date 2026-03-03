@@ -29,7 +29,8 @@
     "index.d.ts",
     "index.js",
     "index.mjs",
-    "browser.js"
+    "browser.js",
+    "genthumb.*.node"
   ],
   "exports": {
     ".": {
@@ -66,7 +67,7 @@
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
-    "prepublishOnly": "napi prepublish -t npm --no-gh-release",
+    "prepublishOnly": "node -e \"console.log('Skipping target package prepublish (temporary single-package release mode).')\"",
     "test": "vitest --run",
     "preversion": "npm run build:debug && git add .",
     "version": "napi version",
@@ -95,12 +96,6 @@
     "oxlint-tsgolint": "^0.12.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
-  },
-  "optionalDependencies": {
-    "genthumb-win32-x64-msvc": "1.0.2",
-    "genthumb-darwin-x64": "1.0.2",
-    "genthumb-linux-x64-gnu": "1.0.2",
-    "genthumb-darwin-arm64": "1.0.2"
   },
   "lint-staged": {
     "*.{js,ts}": [

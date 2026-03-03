@@ -96,20 +96,7 @@ jobs:
           merge-multiple: true
       - name: Verify downloaded native bindings
         run: ls -lh *.node
-      - name: Create target package directories
-        run: |
-          npx napi create-npm-dirs
-          npx napi version
-          for file in ${APP_NAME}.*.node; do
-            target="${file#${APP_NAME}.}"
-            target="${target%.node}"
-            cp "$file" "npm/${target}/${file}"
-          done
-      - name: Publish target packages
-        run: npx napi prepublish -t npm --no-gh-release
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish root package
-        run: npm publish --access public --ignore-scripts
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
