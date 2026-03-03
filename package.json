@@ -1,6 +1,6 @@
 {
   "name": "genthumb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate fast WebP thumbnails from images, PDFs, Office files, spreadsheets, and text",
   "main": "index.js",
   "types": "index.d.ts",
@@ -66,7 +66,7 @@
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "napi prepublish -t npm --no-gh-release",
     "test": "vitest --run",
     "preversion": "npm run build:debug && git add .",
     "version": "napi version",

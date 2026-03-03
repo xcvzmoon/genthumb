@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.1
+
+[compare changes](https://github.com/xcvzmoon/genthumb/compare/v1.0.0...v1.0.1)
+
+### 🚀 Enhancements
+
+- **ci:** Add publish workflow ([9b44654](https://github.com/xcvzmoon/genthumb/commit/9b44654))
+
+### 🏡 Chore
+
+- Update optional dependencies ([306d8ca](https://github.com/xcvzmoon/genthumb/commit/306d8ca))
+- Remove placeholder bench ([24502af](https://github.com/xcvzmoon/genthumb/commit/24502af))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.0.0
 
 
