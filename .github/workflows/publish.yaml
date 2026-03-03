@@ -96,15 +96,11 @@ jobs:
           merge-multiple: true
       - name: Verify downloaded native bindings
         run: ls -lh *.node
-      - name: Stage binaries for target packages
+      - name: Create target package directories
         run: |
+          npx napi create-npm-dirs
           npx napi version
-          for file in ${APP_NAME}.*.node; do
-            target="${file#${APP_NAME}.}"
-            target="${target%.node}"
-            mkdir -p "npm/${target}"
-            cp "$file" "npm/${target}/${file}"
-          done
+          npx napi artifacts --npm-dir npm
       - name: Publish target packages
         run: npx napi prepublish -t npm --no-gh-release
         env:
