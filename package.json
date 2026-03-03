@@ -1,6 +1,6 @@
 {
   "name": "genthumb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate fast WebP thumbnails from images, PDFs, Office files, spreadsheets, and text",
   "main": "index.js",
   "types": "index.d.ts",
@@ -97,10 +97,10 @@
     "vitest": "^4.0.18"
   },
   "optionalDependencies": {
-    "genthumb-win32-x64-msvc": "1.0.0",
-    "genthumb-darwin-x64": "1.0.0",
-    "genthumb-linux-x64-gnu": "1.0.0",
-    "genthumb-darwin-arm64": "1.0.0"
+    "genthumb-win32-x64-msvc": "1.0.2",
+    "genthumb-darwin-x64": "1.0.2",
+    "genthumb-linux-x64-gnu": "1.0.2",
+    "genthumb-darwin-arm64": "1.0.2"
   },
   "lint-staged": {
     "*.{js,ts}": [
