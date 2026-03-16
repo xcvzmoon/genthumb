@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v1.0.3
+
+[compare changes](https://github.com/xcvzmoon/genthumb/compare/v1.0.2...v1.0.3)
+
+### 🩹 Fixes
+
+- **ci:** Fix npm publish workflow for napi target packages ([390e5f5](https://github.com/xcvzmoon/genthumb/commit/390e5f5))
+- **ci:** Align Bun workflows and package metadata with split NAPI publishing ([80c6a9c](https://github.com/xcvzmoon/genthumb/commit/80c6a9c))
+- **ci:** Bun CI for aarch64 GNU cross-build and musl PDF binding tests ([74f94f1](https://github.com/xcvzmoon/genthumb/commit/74f94f1))
+- **ci:** Split-publish CI across macOS x64, aarch64 GNU, and musl ([2f40798](https://github.com/xcvzmoon/genthumb/commit/2f40798))
+
+### 🏡 Chore
+
+- Switch to single-package npm publish with bundled native binaries ([7bee9b8](https://github.com/xcvzmoon/genthumb/commit/7bee9b8))
+- Setup publishing with ci ([d76ce36](https://github.com/xcvzmoon/genthumb/commit/d76ce36))
+
+### 🤖 CI
+
+- Fix target binary staging path in publish workflow ([842748c](https://github.com/xcvzmoon/genthumb/commit/842748c))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.0.2
 
 [compare changes](https://github.com/xcvzmoon/genthumb/compare/v1.0.0...v1.0.2)

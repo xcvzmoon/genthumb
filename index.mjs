@@ -85,12 +85,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-android-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -108,12 +108,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-android-arm-eabi/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -139,12 +139,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-win32-x64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -162,12 +162,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-win32-x64-msvc/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -186,12 +186,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-win32-ia32-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -209,12 +209,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-win32-arm64-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -235,12 +235,12 @@ function requireNative() {
       const bindingPackageVersion =
         require('@xcvzmoon/genthumb-darwin-universal/package.json').version;
       if (
-        bindingPackageVersion !== '1.0.2' &&
+        bindingPackageVersion !== '1.0.3' &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
       ) {
         throw new Error(
-          `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+          `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
         );
       }
       return binding;
@@ -257,12 +257,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/genthumb-darwin-x64');
         const bindingPackageVersion = require('@xcvzmoon/genthumb-darwin-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -280,12 +280,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-darwin-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -307,12 +307,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-freebsd-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -330,12 +330,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-freebsd-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -358,12 +358,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-x64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -381,12 +381,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-x64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -406,12 +406,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-arm64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -429,12 +429,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-arm64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -454,12 +454,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-arm-musleabihf/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -477,12 +477,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-arm-gnueabihf/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -502,12 +502,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-loong64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -525,12 +525,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-loong64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -550,12 +550,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-riscv64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -573,12 +573,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/genthumb-linux-riscv64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.0.2' &&
+            bindingPackageVersion !== '1.0.3' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -597,12 +597,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-linux-ppc64-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -620,12 +620,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-linux-s390x-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -647,12 +647,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-openharmony-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -670,12 +670,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-openharmony-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -693,12 +693,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/genthumb-openharmony-arm/package.json').version;
         if (
-          bindingPackageVersion !== '1.0.2' &&
+          bindingPackageVersion !== '1.0.3' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.0.2 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.0.3 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;

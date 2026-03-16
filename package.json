@@ -1,6 +1,6 @@
 {
   "name": "genthumb",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate fast WebP thumbnails from images, PDFs, Office files, spreadsheets, and text",
   "main": "index.js",
   "types": "index.d.ts",
@@ -61,12 +61,12 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@xcvzmoon/genthumb-darwin-arm64": "1.0.2",
-    "@xcvzmoon/genthumb-darwin-x64": "1.0.2",
-    "@xcvzmoon/genthumb-linux-arm64-gnu": "1.0.2",
-    "@xcvzmoon/genthumb-linux-x64-gnu": "1.0.2",
-    "@xcvzmoon/genthumb-linux-x64-musl": "1.0.2",
-    "@xcvzmoon/genthumb-win32-x64-msvc": "1.0.2"
+    "@xcvzmoon/genthumb-darwin-arm64": "1.0.3",
+    "@xcvzmoon/genthumb-darwin-x64": "1.0.3",
+    "@xcvzmoon/genthumb-linux-arm64-gnu": "1.0.3",
+    "@xcvzmoon/genthumb-linux-x64-gnu": "1.0.3",
+    "@xcvzmoon/genthumb-linux-x64-musl": "1.0.3",
+    "@xcvzmoon/genthumb-win32-x64-msvc": "1.0.3"
   },
   "scripts": {
     "artifacts": "napi artifacts",
