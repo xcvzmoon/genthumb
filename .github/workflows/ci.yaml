@@ -263,6 +263,31 @@ jobs:
       - name: List packages
         run: ls -R ./npm
         shell: bash
+      - name: Verify npm publish auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          NPM_USER=$(npm whoami)
+          echo "Authenticated to npm as ${NPM_USER}"
+
+          FIRST_PACKAGE=$(node -e "
+            const fs = require('node:fs')
+            const path = require('node:path')
+            const npmDir = path.join(process.cwd(), 'npm')
+            const packages = fs.readdirSync(npmDir).sort()
+            if (packages.length === 0) {
+              throw new Error('No generated npm packages found in ./npm')
+            }
+            const pkgJson = JSON.parse(fs.readFileSync(path.join(npmDir, packages[0], 'package.json'), 'utf8'))
+            process.stdout.write(pkgJson.name)
+          ")
+
+          if ! npm view "$FIRST_PACKAGE" version >/dev/null 2>&1; then
+            echo "Package $FIRST_PACKAGE does not exist on npm yet."
+            echo "This publish requires an NPM_TOKEN that can create new public packages, not just update existing ones."
+            echo "If publish still fails with E404, replace NPM_TOKEN with a broader publish token from the owning npm account."
+          fi
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
