@@ -43,7 +43,7 @@
   },
   "napi": {
     "binaryName": "genthumb",
-    "packageName": "@xcvzmoon/genthumb",
+    "packageName": "genthumb",
     "targets": [
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",
@@ -61,12 +61,12 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@xcvzmoon/genthumb-darwin-arm64": "1.0.3",
-    "@xcvzmoon/genthumb-darwin-x64": "1.0.3",
-    "@xcvzmoon/genthumb-linux-arm64-gnu": "1.0.3",
-    "@xcvzmoon/genthumb-linux-x64-gnu": "1.0.3",
-    "@xcvzmoon/genthumb-linux-x64-musl": "1.0.3",
-    "@xcvzmoon/genthumb-win32-x64-msvc": "1.0.3"
+    "genthumb-darwin-arm64": "1.0.3",
+    "genthumb-darwin-x64": "1.0.3",
+    "genthumb-linux-arm64-gnu": "1.0.3",
+    "genthumb-linux-x64-gnu": "1.0.3",
+    "genthumb-linux-x64-musl": "1.0.3",
+    "genthumb-win32-x64-msvc": "1.0.3"
   },
   "scripts": {
     "artifacts": "napi artifacts",
