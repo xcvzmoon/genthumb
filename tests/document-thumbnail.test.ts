@@ -5,9 +5,10 @@ import { describe, expect, it } from 'vitest';
 import { generateThumbnail } from '../index.js';
 
 const testDir = path.join(process.cwd(), 'tests', 'documents');
+const pdfTest = process.env.GENTHUMB_SKIP_PDF_BINDING_TEST ? it.skip : it;
 
 describe('generate_thumbnail document', () => {
-  it('should generate thumbnail from PDF document', () => {
+  pdfTest('should generate thumbnail from PDF document', () => {
     const fixturePath = path.join(testDir, 'test-pdf.pdf');
     const result = generateThumbnail(fixturePath, 100, 100);
     const header = result.subarray(0, 4);
