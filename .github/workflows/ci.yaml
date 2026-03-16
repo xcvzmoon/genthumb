@@ -266,7 +266,11 @@ jobs:
       - name: Verify npm publish auth
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          NPM_USER=$(npm whoami)
+          if ! NPM_USER=$(npm whoami); then
+            echo "NPM_TOKEN is missing, expired, or does not have valid npm publish access."
+            echo "Update the GitHub Actions secret NPM_TOKEN with a valid npm automation/publish token and retry."
+            exit 1
+          fi
           echo "Authenticated to npm as ${NPM_USER}"
 
           FIRST_PACKAGE=$(node -e "
