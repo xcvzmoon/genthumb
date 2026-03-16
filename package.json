@@ -29,8 +29,7 @@
     "index.d.ts",
     "index.js",
     "index.mjs",
-    "browser.js",
-    "genthumb.*.node"
+    "browser.js"
   ],
   "exports": {
     ".": {
@@ -39,37 +38,52 @@
       "import": "./index.mjs",
       "require": "./index.js",
       "default": "./index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "napi": {
     "binaryName": "genthumb",
+    "packageName": "@xcvzmoon/genthumb",
     "targets": [
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",
       "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-linux-musl",
+      "aarch64-unknown-linux-gnu",
       "aarch64-apple-darwin"
     ]
   },
   "engines": {
-    "node": ">= 12.22.0 < 13 || >= 14.17.0 < 15 || >= 15.12.0 < 16 || >= 16.0.0"
+    "node": ">=20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "optionalDependencies": {
+    "@xcvzmoon/genthumb-darwin-arm64": "1.0.2",
+    "@xcvzmoon/genthumb-darwin-x64": "1.0.2",
+    "@xcvzmoon/genthumb-linux-arm64-gnu": "1.0.2",
+    "@xcvzmoon/genthumb-linux-x64-gnu": "1.0.2",
+    "@xcvzmoon/genthumb-linux-x64-musl": "1.0.2",
+    "@xcvzmoon/genthumb-win32-x64-msvc": "1.0.2"
+  },
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "vitest bench",
-    "build": "napi build --platform --release --js index.js && napi build --platform --release --esm --js index.mjs",
-    "build:debug": "napi build --platform --js index.js && napi build --platform --esm --js index.mjs",
+    "build": "bun run build:cjs && bun run build:esm",
+    "build:cjs": "napi build --platform --release --js index.js",
+    "build:esm": "napi build --platform --release --esm --js index.mjs",
+    "build:debug": "napi build --platform",
     "format": "run-p format:oxfmt format:rs format:toml",
     "format:oxfmt": "oxfmt && oxfmt --check",
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
-    "prepublishOnly": "node -e \"console.log('Skipping target package prepublish (temporary single-package release mode).')\"",
-    "test": "vitest --run",
-    "preversion": "npm run build:debug && git add .",
+    "prepublishOnly": "echo 'Publishing split packages via CI workflow'",
+    "test": "bun run build && vitest --run",
+    "test:bindings": "vitest --run",
+    "preversion": "bun run build:cjs && bun run build:esm && git add .",
     "version": "napi version",
     "prepare": "husky",
     "changelog": "changelogen",
