@@ -43,7 +43,7 @@
   },
   "napi": {
     "binaryName": "genthumb",
-    "packageName": "genthumb",
+    "packageName": "@xcvzmoon/genthumb",
     "targets": [
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",
@@ -59,14 +59,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
-  },
-  "optionalDependencies": {
-    "genthumb-darwin-arm64": "1.0.3",
-    "genthumb-darwin-x64": "1.0.3",
-    "genthumb-linux-arm64-gnu": "1.0.3",
-    "genthumb-linux-x64-gnu": "1.0.3",
-    "genthumb-linux-x64-musl": "1.0.3",
-    "genthumb-win32-x64-msvc": "1.0.3"
   },
   "scripts": {
     "artifacts": "napi artifacts",
@@ -110,6 +102,14 @@
     "oxlint-tsgolint": "^0.12.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
+  },
+  "optionalDependencies": {
+    "@xcvzmoon/genthumb-darwin-arm64": "1.0.3",
+    "@xcvzmoon/genthumb-darwin-x64": "1.0.3",
+    "@xcvzmoon/genthumb-linux-arm64-gnu": "1.0.3",
+    "@xcvzmoon/genthumb-linux-x64-gnu": "1.0.3",
+    "@xcvzmoon/genthumb-linux-x64-musl": "1.0.3",
+    "@xcvzmoon/genthumb-win32-x64-msvc": "1.0.3"
   },
   "lint-staged": {
     "*.{js,ts}": [
