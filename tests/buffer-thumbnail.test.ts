@@ -25,4 +25,34 @@ describe('generate_thumbnail buffer input', () => {
     expect(result.length).toBeGreaterThan(0);
     expect(result.subarray(0, 4).toString()).toBe('RIFF');
   });
+
+  it('should generate thumbnail from the failing DOCX buffer labeled as zip', () => {
+    const inputPath = path.join(testDir, 'test-docx.docx');
+    const input = fs.readFileSync(inputPath);
+    const result = generateThumbnail(input, 220, 220, 'application/zip');
+
+    expect(result).toBeInstanceOf(Buffer);
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.subarray(0, 4).toString()).toBe('RIFF');
+  });
+
+  it('should generate thumbnail from PPTX buffer labeled as zip', () => {
+    const inputPath = path.join(testDir, 'test-pptx.pptx');
+    const input = fs.readFileSync(inputPath);
+    const result = generateThumbnail(input, 240, 160, 'application/zip');
+
+    expect(result).toBeInstanceOf(Buffer);
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.subarray(0, 4).toString()).toBe('RIFF');
+  });
+
+  it('should generate thumbnail from XLSX buffer labeled as zip', () => {
+    const inputPath = path.join(testDir, 'test-xlsx.xlsx');
+    const input = fs.readFileSync(inputPath);
+    const result = generateThumbnail(input, 240, 160, 'application/zip');
+
+    expect(result).toBeInstanceOf(Buffer);
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.subarray(0, 4).toString()).toBe('RIFF');
+  });
 });
