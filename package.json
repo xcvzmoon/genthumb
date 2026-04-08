@@ -73,7 +73,7 @@
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
     "prepublishOnly": "echo 'Publishing split packages via CI workflow'",
-    "test": "bun run build && vitest --run",
+    "test": "bun run build && vitest run --reporter=verbose",
     "test:bindings": "vitest --run",
     "preversion": "bun run build:cjs && bun run build:esm && git add .",
     "version": "napi version",

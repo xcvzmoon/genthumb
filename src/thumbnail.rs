@@ -4,9 +4,11 @@ use crate::presentation;
 use crate::spreadsheet;
 use crate::text;
 use image::{DynamicImage, ImageBuffer, ImageError, Rgba, imageops};
+use std::io::Cursor;
 use std::io::Write;
 use std::path::Path;
 use tempfile::Builder;
+use zip::ZipArchive;
 
 pub struct ThumbnailOptions {
   pub width: u32,
@@ -75,7 +77,9 @@ fn detect_input_type(path: &Path) -> InputType {
       return InputType::Text;
     }
 
-    return InputType::Unsupported(mime.to_string());
+    if mime != "application/zip" {
+      return InputType::Unsupported(mime.to_string());
+    }
   }
 
   if let Some(ext) = path.extension().and_then(|extension| extension.to_str()) {
@@ -159,12 +163,41 @@ fn extension_for_mime_type(mime_type: &str) -> &'static str {
   }
 }
 
+fn detect_office_mime_type_from_zip(input: &[u8]) -> Option<&'static str> {
+  let archive = ZipArchive::new(Cursor::new(input)).ok()?;
+
+  let file_names = archive.file_names().collect::<Vec<_>>();
+
+  if file_names.iter().any(|name| name.starts_with("word/")) {
+    return Some("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+  }
+
+  if file_names.iter().any(|name| name.starts_with("ppt/")) {
+    return Some("application/vnd.openxmlformats-officedocument.presentationml.presentation");
+  }
+
+  if file_names.iter().any(|name| name.starts_with("xl/")) {
+    return Some("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+  }
+
+  None
+}
+
+fn normalize_buffer_mime_type<'a>(input: &[u8], mime_type: &'a str) -> &'a str {
+  if mime_type != "application/zip" {
+    return mime_type;
+  }
+
+  detect_office_mime_type_from_zip(input).unwrap_or(mime_type)
+}
+
 pub fn generate_thumbnail_from_buffer(
   input: &[u8],
   mime_type: &str,
   opts: ThumbnailOptions,
 ) -> anyhow::Result<Vec<u8>> {
-  let extension = extension_for_mime_type(mime_type);
+  let normalized_mime_type = normalize_buffer_mime_type(input, mime_type);
+  let extension = extension_for_mime_type(normalized_mime_type);
 
   let mut temp = Builder::new()
     .prefix("genthumb-input-")
