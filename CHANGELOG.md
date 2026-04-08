@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4
+
+[compare changes](https://github.com/xcvzmoon/genthumb/compare/v1.0.3...v1.0.4)
+
+### 🩹 Fixes
+
+- Normalize zip-labeled Office files for thumbnail generation ([eab015f](https://github.com/xcvzmoon/genthumb/commit/eab015f))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.0.3
 
 [compare changes](https://github.com/xcvzmoon/genthumb/compare/v1.0.2...v1.0.3)
